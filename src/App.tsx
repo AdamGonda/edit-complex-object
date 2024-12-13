@@ -17,18 +17,18 @@ function App() {
       <div className={""}>
         <div className={"flex gap-2"}>
           <p className="font-bold">Coordinates:</p>
-          <p>
+          <p style={{ background: color, color: 'white' }}>
             {coordinate.x}, {coordinate.y}
           </p>
         </div>
         <div className={"flex gap-2"}>
           <p className="font-bold">Color:</p>
-          <p>{color ? <span className={`bg-[${color}]`}>{color.toUpperCase()}</span> : <span className="underline">Select a color</span>}</p> 
+          <p>{color ? <span style={{ background: color, color: 'white' }}>{color.toUpperCase()}</span> : <span className="underline">Select a color</span>}</p> 
         </div>
         <div className={"flex gap-2"}>
           <p className="font-bold">Date time:</p>
           <p>
-            {date ? format(date, 'yyyy-MM-dd HH:mm:ss') : <span className="underline">Select a date</span>} 
+            {date ? <span style={{ background: color, color: 'white' }}>{format(date, 'yyyy-MM-dd HH:mm:ss')}</span> : <span className="underline">Select a date</span>} 
           </p>
         </div>
       </div>
