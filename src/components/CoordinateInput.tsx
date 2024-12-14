@@ -1,45 +1,48 @@
-import { useState } from "react";
+import React, { memo } from "react";
 import { Input } from "./ui/input";
 
 interface CoordinateInputProps {
-  onChange: (coordinate: { x: number; y: number }) => void;
+  coordinate: { x: string; y: string };
+  setCoordinate: React.Dispatch<React.SetStateAction<{ x: string; y: string }>>;
 }
 
-export default function CoordinateInput({ onChange }: CoordinateInputProps) {
-    const [coordinate, setCoordinate] = useState<{
-      x: number;
-      y: number;
-    }>({ x: 0, y: 0 });
-    
-    function updateCoordinate(e: React.ChangeEvent<HTMLInputElement>) {
-      const key = e.target.id
-      const newValue = e.target.value;
-  
-      setCoordinate((prevState) => {
-        const newCoordinate = {
-          ...prevState,
-          [key]: newValue,
-        };
+function CoordinateInput({ coordinate, setCoordinate }: CoordinateInputProps) {
+  function updateCoordinate(e: React.ChangeEvent<HTMLInputElement>) {
+    const key = e.target.id;
+    const newValue = e.target.value;
 
-        onChange(newCoordinate);
-        return newCoordinate
-      });
-    }
+    setCoordinate((prevState) => {
+      const newCoordinate = {
+        ...prevState,
+        [key]: newValue,
+      };
 
-    return (
-      <div className="flex gap-2 w-[200px]">
-        <Input
-            id="x"
-            type="number"
-            value={coordinate.x}
-            onChange={updateCoordinate}
-          />
-          <Input
-            id="y"
-            type="number"
-            value={coordinate.y}
-            onChange={updateCoordinate}
-          />
-      </div>
-    )
+      return newCoordinate;
+    });
   }
+
+  return (
+    <div className="flex gap-2 w-[200px]">
+      <label className="text-sm">
+        X coordinate
+        <Input
+          id="x"
+          type="number"
+          value={coordinate.x}
+          onChange={updateCoordinate}
+        />
+      </label>
+      <label className="text-sm">
+        Y coordinate
+        <Input
+          id="y"
+          type="number"
+          value={coordinate.y}
+          onChange={updateCoordinate}
+        />
+      </label>
+    </div>
+  );
+}
+
+export default memo(CoordinateInput);
