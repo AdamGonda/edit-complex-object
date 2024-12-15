@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import counterReducer from '../features/counter/counterSlice';
+import coordinateReducer from '../features/coordinate/coordinateSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    coordinate: coordinateReducer,
   },
 });
 

@@ -1,13 +1,14 @@
-import { Coordinate } from "@/types";
+import { useAppSelector } from "@/store/hooks";
 import { format } from "date-fns";
 
 interface DataDisplayProps {
-  coordinate: Coordinate;
   color: string | undefined;
   date: Date | undefined;
 }
 
-export default function DataDisplay({ coordinate, color, date }: DataDisplayProps) {
+export default function DataDisplay({ color, date }: DataDisplayProps) {
+  const coordinate = useAppSelector((state) => state.coordinate.value);
+
   return (
     <div
       className="flex flex-col gap-3 p-6 rounded-md border-[10px]"

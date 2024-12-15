@@ -1,24 +1,17 @@
-import React, { memo } from "react";
+import React from "react";
 import { Input } from "./ui/input";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setCoordinate } from "../features/coordinate/coordinateSlice";
 
-interface CoordinateInputProps {
-  coordinate: { x: string; y: string };
-  setCoordinate: React.Dispatch<React.SetStateAction<{ x: string; y: string }>>;
-}
+function CoordinateInput() {
+  const state = useAppSelector((state) => state.coordinate.value);
+  const dispatch = useAppDispatch();
 
-function CoordinateInput({ coordinate, setCoordinate }: CoordinateInputProps) {
   function updateCoordinate(e: React.ChangeEvent<HTMLInputElement>) {
     const key = e.target.id;
     const newValue = e.target.value;
 
-    setCoordinate((prevState) => {
-      const newCoordinate = {
-        ...prevState,
-        [key]: newValue,
-      };
-
-      return newCoordinate;
-    });
+    dispatch(setCoordinate({ key, newValue }));
   }
 
   return (
@@ -28,7 +21,7 @@ function CoordinateInput({ coordinate, setCoordinate }: CoordinateInputProps) {
         <Input
           id="x"
           type="number"
-          value={coordinate.x}
+          value={state.x}
           onChange={updateCoordinate}
         />
       </label>
@@ -37,7 +30,7 @@ function CoordinateInput({ coordinate, setCoordinate }: CoordinateInputProps) {
         <Input
           id="y"
           type="number"
-          value={coordinate.y}
+          value={state.y}
           onChange={updateCoordinate}
         />
       </label>
@@ -45,4 +38,4 @@ function CoordinateInput({ coordinate, setCoordinate }: CoordinateInputProps) {
   );
 }
 
-export default memo(CoordinateInput);
+export default CoordinateInput;
