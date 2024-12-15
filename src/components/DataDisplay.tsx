@@ -1,13 +1,10 @@
 import { useAppSelector } from "@/store/hooks";
 import { format } from "date-fns";
 
-interface DataDisplayProps {
-  color: string | undefined;
-  date: Date | undefined;
-}
-
-export default function DataDisplay({ color, date }: DataDisplayProps) {
+export default function DataDisplay() {
   const coordinate = useAppSelector((state) => state.coordinate.value);
+  const date = useAppSelector((state) => state.dateTimeSlice.value);  
+  const color = useAppSelector((state) => state.colorSlice.value);
 
   return (
     <div

@@ -1,9 +1,9 @@
 "use client";
- 
+
 import * as React from "react";
-import { CalendarIcon } from "@radix-ui/react-icons"
+import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
- 
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -13,33 +13,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setDateTime } from "@/features/dateTimeSlice";
 
-interface DateTimePickerProps {
-  onChange: (date: Date) => void;
-}
- 
-export function DateTimePicker({ onChange }: DateTimePickerProps) {
-  const [date, setDate] = React.useState<Date>();
+export function DateTimePicker() {
+  const date = useAppSelector((state) => state.dateTimeSlice.value);
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = React.useState(false);
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(date as Date);
-    }
-  }, [date, onChange]);
- 
   const hours = Array.from({ length: 24 }, (_, i) => i);
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
-      setDate(selectedDate);
+      dispatch(setDateTime({ newValue: selectedDate }));
     }
   };
- 
-  const handleTimeChange = (
-    type: "hour" | "minute",
-    value: string
-  ) => {
+
+  const handleTimeChange = (type: "hour" | "minute", value: string) => {
     if (date) {
       const newDate = new Date(date);
       if (type === "hour") {
@@ -47,10 +36,10 @@ export function DateTimePicker({ onChange }: DateTimePickerProps) {
       } else if (type === "minute") {
         newDate.setMinutes(parseInt(value));
       }
-      setDate(newDate);
+      dispatch(setDateTime({ newValue: newDate }));
     }
   };
- 
+
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
@@ -84,7 +73,9 @@ export function DateTimePicker({ onChange }: DateTimePickerProps) {
                   <Button
                     key={hour}
                     size="icon"
-                    variant={date && date.getHours() === hour ? "default" : "ghost"}
+                    variant={
+                      date && date.getHours() === hour ? "default" : "ghost"
+                    }
                     className="sm:w-full shrink-0 aspect-square"
                     onClick={() => handleTimeChange("hour", hour.toString())}
                   >
@@ -100,11 +91,15 @@ export function DateTimePicker({ onChange }: DateTimePickerProps) {
                   <Button
                     key={minute}
                     size="icon"
-                    variant={date && date.getMinutes() === minute ? "default" : "ghost"}
+                    variant={
+                      date && date.getMinutes() === minute ? "default" : "ghost"
+                    }
                     className="sm:w-full shrink-0 aspect-square"
-                    onClick={() => handleTimeChange("minute", minute.toString())}
+                    onClick={() =>
+                      handleTimeChange("minute", minute.toString())
+                    }
                   >
-                    {minute.toString().padStart(2, '0')}
+                    {minute.toString().padStart(2, "0")}
                   </Button>
                 ))}
               </div>

@@ -1,23 +1,13 @@
-import { HexColorPicker } from "react-colorful";
+import ColorPicker from "./ColorPicker";
 import CoordinateInput from "./CoordinateInput";
 import { DateTimePicker } from "./DateTimePicker";
 
-interface ControlsProps {
-  color: string | undefined;
-  setColor: (color: string) => void;
-  setDate: (date: Date) => void;
-}
-
-export default function Controls({
-  color,
-  setColor,
-  setDate,
-}: ControlsProps) {
+export default function Controls() {
   return (
     <div className={"flex flex-col gap-4"}>
       <CoordinateInput />
-      <HexColorPicker color={color} onChange={setColor} />
-      <DateTimePicker onChange={setDate} />
+      <ColorPicker />
+      <DateTimePicker />
     </div>
   );
 }
