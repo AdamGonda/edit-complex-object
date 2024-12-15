@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import CoordinateInput from "@/components/CoordinateInput";
 import { DateTimePicker } from "./components/DateTimePicker";
@@ -12,20 +12,11 @@ function App() {
   const [color, setColor] = useState<string>();
   const [date, setDate] = useState<Date>();
 
-  useEffect(() => {
-    if (color) {
-      document.documentElement.style.setProperty(
-        "--background",
-        color.toUpperCase()
-      );
-    }
-  }, [color]);
-
   return (
     <div
       className={"flex w-screen h-screen justify-center items-center gap-20"}
     >
-      <div className={"flex flex-col gap-4 p-6 rounded-md bg-white"}>
+      <div className={"flex flex-col gap-4"}>
         <CoordinateInput
           coordinate={coordinate}
           setCoordinate={setCoordinate}
@@ -34,7 +25,8 @@ function App() {
         <DateTimePicker onChange={setDate} />
       </div>
       <div
-        className="flex flex-col w-[250px] gap-3 p-6 rounded-md bg-white"
+        className="flex flex-col w-[250px] gap-3 p-6 rounded-md border-[10px]"
+        style={{ borderColor: color }}
       >
         <p>
           {!coordinate.x && !coordinate.y ? (
