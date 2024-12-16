@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "./ui/input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setCoordinate } from "../features/coordinateSlice";
+import { setCoordinate } from "../features/coordinate/coordinateSlice";
 
 function CoordinateInput() {
   const coordinate = useAppSelector((state) => state.coordinate.value);

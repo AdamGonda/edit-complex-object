@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import coordinateReducer from '../features/coordinateSlice';
-import colorReducer from '../features/colorSlice';
-import dateTimeReducer from '../features/dateTimeSlice';
+import coordinateReducer from '../features/coordinate/coordinateSlice';
+import colorReducer from '../features/color/colorSlice';
+import dateTimeReducer from '../features/dateTime/dateTimeSlice';
 
 export const store = configureStore({
   reducer: {

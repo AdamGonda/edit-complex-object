@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setDateTime } from "@/features/dateTimeSlice";
+import { setDateTime } from "@/features/dateTime/dateTimeSlice";
 
 export function DateTimePicker() {
   const date = useAppSelector((state) => state.dateTimeSlice.value);

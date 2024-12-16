@@ -1,4 +1,4 @@
-import { setColor } from "@/features/colorSlice";
+import { setColor } from "@/features/color/colorSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { HexColorPicker } from "react-colorful";
 
